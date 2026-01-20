@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Студент тіркеу және қатысу жүйесі</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div>
+        <div class="title">Attendance</div>
+        <div class="subtitle">Студент тіркеу және сабаққа қатысу</div>
+      </div>
+    </div>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="students">Студенттер</button>
+      <button class="tab" data-tab="attendance">Қатысу</button>
+      <button class="tab" data-tab="reports">Есеп</button>
+      <button class="tab" data-tab="settings">Баптау</button>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- STUDENTS -->
+    <section class="panel active" id="tab-students">
+      <div class="grid2">
+        <div class="card">
+          <h2>Студент қосу</h2>
+          <form id="studentForm" class="form">
+            <div class="row">
+              <label>Аты-жөні</label>
+              <input required id="fullName" placeholder="Мысалы: Айдос Сәрсен"/>
+            </div>
+            <div class="row">
+              <label>Тобы</label>
+              <input required id="groupName" placeholder="Мысалы: SE-21"/>
+            </div>
+            <div class="row">
+              <label>Студент ID / Телефон</label>
+              <input id="studentId" placeholder="Мысалы: 2400123 немесе +7..."/>
+            </div>
+            <button class="btn primary" type="submit">Қосу</button>
+            <p class="hint">Деректер браузерде сақталады (localStorage).</p>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="cardHead">
+            <h2>Студенттер тізімі</h2>
+            <div class="actions">
+              <input id="searchInput" class="mini" placeholder="Іздеу..."/>
+              <select id="groupFilter" class="mini">
+                <option value="">Барлық топ</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="tableWrap">
+            <table class="table" id="studentsTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Аты-жөні</th>
+                  <th>Тобы</th>
+                  <th>ID/Тел</th>
+                  <th>Әрекет</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="footerNote" id="studentsCount"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ATTENDANCE -->
+    <section class="panel" id="tab-attendance">
+      <div class="card">
+        <div class="cardHead">
+          <h2>Сабаққа қатысуды белгілеу</h2>
+          <div class="actions">
+            <input id="lessonDate" type="date" class="mini"/>
+            <select id="lessonGroup" class="mini">
+              <option value="">Топ таңда</option>
+            </select>
+            <button class="btn" id="loadAttendance">Тізімді ашу</button>
+          </div>
+        </div>
+
+        <div id="attendanceArea" class="mutedBox">
+          <p class="muted">Күн мен топты таңда да “Тізімді ашу” бас.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPORTS -->
+    <section class="panel" id="tab-reports">
+      <div class="grid2">
+        <div class="card">
+          <h2>Жалпы статистика</h2>
+          <div class="stats" id="statsBox"></div>
+          <div class="hr"></div>
+          <button class="btn" id="exportCsv">CSV экспорт</button>
+          <p class="hint">CSV — Excel-ге ашылады.</p>
+        </div>
+
+        <div class="card">
+          <div class="cardHead">
+            <h2>Қатысу тарихы</h2>
+            <div class="actions">
+              <input id="historySearch" class="mini" placeholder="Студент аты..."/>
+              <input id="historyDate" type="date" class="mini"/>
+            </div>
+          </div>
+          <div class="tableWrap">
+            <table class="table" id="historyTable">
+              <thead>
+                <tr>
+                  <th>Күні</th>
+                  <th>Топ</th>
+                  <th>Студент</th>
+                  <th>Статус</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="footerNote" id="historyCount"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="panel" id="tab-settings">
+      <div class="card">
+        <h2>Баптау / Деректер</h2>
+        <div class="row">
+          <button class="btn danger" id="wipeAll">Барлық деректі өшіру</button>
+          <span class="hint">Абайла: студенттер де, қатысу да өшеді.</span>
+        </div>
+        <div class="hr"></div>
+        <h3>Статус түсіндірме</h3>
+        <ul class="list">
+          <li><span class="badge ok">Қатысты</span> — сабақта болды</li>
+          <li><span class="badge late">Кешікті</span> — кешігіп келді</li>
+          <li><span class="badge exc">Себепті</span> — құжат/себеп бар</li>
+          <li><span class="badge abs">Қатыспады</span> — келмеді</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>© Attendance App — localStorage demo</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
